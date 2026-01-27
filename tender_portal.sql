@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
--- Host: localhost    Database: nssd_procurement
+-- Host: localhost    Database: tender_portal
 -- ------------------------------------------------------
 -- Server version	8.0.44
 
@@ -27,7 +27,7 @@ CREATE TABLE `bids` (
   `tender_id` bigint unsigned NOT NULL,
   `user_id` bigint unsigned NOT NULL,
   `quoted_amount` decimal(15,2) NOT NULL,
-  `document_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `document_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -56,8 +56,8 @@ DROP TABLE IF EXISTS `cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cache` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -69,6 +69,7 @@ CREATE TABLE `cache` (
 
 LOCK TABLES `cache` WRITE;
 /*!40000 ALTER TABLE `cache` DISABLE KEYS */;
+INSERT INTO `cache` VALUES ('laravel-cache-ghayes@example.or|127.0.0.1','i:1;',1769507604),('laravel-cache-ghayes@example.or|127.0.0.1:timer','i:1769507604;',1769507604);
 /*!40000 ALTER TABLE `cache` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,8 +81,8 @@ DROP TABLE IF EXISTS `cache_locks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -105,11 +106,11 @@ DROP TABLE IF EXISTS `failed_jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -133,13 +134,13 @@ DROP TABLE IF EXISTS `job_batches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `job_batches` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_jobs` int NOT NULL,
   `pending_jobs` int NOT NULL,
   `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `failed_job_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cancelled_at` int DEFAULT NULL,
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL,
@@ -165,8 +166,8 @@ DROP TABLE IF EXISTS `jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `attempts` tinyint unsigned NOT NULL,
   `reserved_at` int unsigned DEFAULT NULL,
   `available_at` int unsigned NOT NULL,
@@ -194,7 +195,7 @@ DROP TABLE IF EXISTS `migrations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -219,7 +220,7 @@ DROP TABLE IF EXISTS `model_has_permissions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint unsigned NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
   KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
@@ -245,7 +246,7 @@ DROP TABLE IF EXISTS `model_has_roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `model_has_roles` (
   `role_id` bigint unsigned NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
@@ -271,8 +272,8 @@ DROP TABLE IF EXISTS `password_reset_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -296,8 +297,8 @@ DROP TABLE IF EXISTS `permissions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -351,8 +352,8 @@ DROP TABLE IF EXISTS `roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -378,11 +379,11 @@ DROP TABLE IF EXISTS `sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
@@ -396,7 +397,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('82IkKsCjSZRsDCCRroi0y60SFRKXj9tckGi1z1jV',2,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoibTJHRkkwdGV1c0ZLVXRRVWlLZDVlVEY2T2k0Uk1XTmpyZjFYMHR3biI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9',1766559402),('gDUiPIuvuxw1aCUSjcz4bOxifD52Nq8iVXXPEBzZ',2,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoib0pIWHlZSkp0QzhBaEl3bk9uaGNUT2dzN3VRRWluMjV1TWVxOG1MViI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9',1766822413);
+INSERT INTO `sessions` VALUES ('82IkKsCjSZRsDCCRroi0y60SFRKXj9tckGi1z1jV',2,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoibTJHRkkwdGV1c0ZLVXRRVWlLZDVlVEY2T2k0Uk1XTmpyZjFYMHR3biI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9',1766559402),('gDUiPIuvuxw1aCUSjcz4bOxifD52Nq8iVXXPEBzZ',2,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoib0pIWHlZSkp0QzhBaEl3bk9uaGNUT2dzN3VRRWluMjV1TWVxOG1MViI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9',1766822413),('KWoISe804wY3VaKZ5frqn2M7xwzwFpYmDlA2ifmk',2,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0','YTo0OntzOjY6Il90b2tlbiI7czo0MDoidUR3WnY3dDQ0UUNTcFJubUdoTXlwS1hXTGYxNkIwcUc2TTlrc0I2bSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90ZW5kZXJzIjtzOjU6InJvdXRlIjtzOjEzOiJ0ZW5kZXJzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9',1769507808);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,11 +410,11 @@ DROP TABLE IF EXISTS `tenders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tenders` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tender_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tender_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `closing_date` datetime NOT NULL,
-  `status` enum('open','closed','processing') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'open',
+  `status` enum('open','closed','processing') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'open',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -441,11 +442,11 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -459,7 +460,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Test User','test@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','dnxVaf5tqS','2025-12-23 22:47:53','2025-12-23 22:47:53'),(2,'Navy Admin Officer','admin@example.com','2025-12-23 22:47:53','$2y$12$SgLNrpNqsrSUSbKkm/C/O.1aLy9qYqX1or.VhSSLgkxtMiC03WuJW','N9iqoBwJjLrw94DkDx5Z4NuJyNHSY3mDhQDsq9xl7rosHC7JdkQIMSxLprf5','2025-12-23 22:47:53','2025-12-23 22:49:40'),(3,'Dr. Bennett Paucek','ghayes@example.org','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','FAqsjMv2ec','2025-12-23 22:47:53','2025-12-23 22:47:53'),(4,'Leo Pfeffer','noconner@example.org','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Gs1zbm6AJF','2025-12-23 22:47:53','2025-12-23 22:47:53'),(5,'Antoinette Boyle','shyanne67@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','i94YVCESRa','2025-12-23 22:47:53','2025-12-23 22:47:53'),(6,'Mr. Mckenna Lind','johns.gust@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','KVZ2eyLMfW','2025-12-23 22:47:53','2025-12-23 22:47:53'),(7,'Angelo Swaniawski','lynch.delpha@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','mS6Vk6foV8','2025-12-23 22:47:53','2025-12-23 22:47:53'),(8,'Kyla Swaniawski Jr.','roger74@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','kAjndqonbv','2025-12-23 22:47:53','2025-12-23 22:47:53'),(9,'Joanny McDermott IV','jovan.rolfson@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','fsm8SiSq32','2025-12-23 22:47:53','2025-12-23 22:47:53'),(10,'Mr. Frankie Russel','duncan.kunze@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','vu71TAyZub','2025-12-23 22:47:53','2025-12-23 22:47:53'),(11,'Myles Strosin','roberta.abbott@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','GMgLnI5DVy','2025-12-23 22:47:53','2025-12-23 22:47:53'),(12,'Prof. Elmira Schiller MD','toreilly@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','3nMSwwZT8A','2025-12-23 22:47:54','2025-12-23 22:47:54'),(13,'Dr. Dario Hahn IV','johnathan90@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','SU1wcjQRwf','2025-12-23 22:47:54','2025-12-23 22:47:54'),(14,'Pasquale Murphy','janessa.becker@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','ZJIzMzzXPo','2025-12-23 22:47:54','2025-12-23 22:47:54'),(15,'Ms. Lulu Daugherty I','chelsea13@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qZpyMtiGhm','2025-12-23 22:47:54','2025-12-23 22:47:54'),(16,'Brando Beer','bednar.mose@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','kiApaQ7aK4','2025-12-23 22:47:54','2025-12-23 22:47:54'),(17,'Susie Konopelski','judy15@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','wz77Sg2gPs','2025-12-23 22:47:54','2025-12-23 22:47:54'),(18,'Antonetta Yundt','carter.daren@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','ouL3Ns9QJW','2025-12-23 22:47:54','2025-12-23 22:47:54'),(19,'Florencio Casper','yasmeen94@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qxZBSjIkdy','2025-12-23 22:47:54','2025-12-23 22:47:54'),(20,'Kylie Beatty','imaggio@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','JCPfanqZSe','2025-12-23 22:47:54','2025-12-23 22:47:54'),(21,'Alana Larson','bechtelar.sterling@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','PPXU1QJSbG','2025-12-23 22:47:54','2025-12-23 22:47:54'),(22,'Jeremy Heidenreich','rcarroll@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qNtezrMuzM','2025-12-23 22:47:54','2025-12-23 22:47:54'),(23,'Tremaine Moore Jr.','nparker@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','KKFKBuhGuw','2025-12-23 22:47:54','2025-12-23 22:47:54'),(24,'Bud Pouros','boris03@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Y33F1jsAbc','2025-12-23 22:47:54','2025-12-23 22:47:54'),(25,'Roel Mayert','cruz16@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','xRBcz2MEiP','2025-12-23 22:47:54','2025-12-23 22:47:54'),(26,'Ryan Johns II','mschneider@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','9VPBugvGll','2025-12-23 22:47:54','2025-12-23 22:47:54'),(27,'Abby Ebert','wkoepp@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','QaFR5o9ja6','2025-12-23 22:47:54','2025-12-23 22:47:54'),(28,'Chasity Lynch','norbert66@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','SkABFbCibG','2025-12-23 22:47:54','2025-12-23 22:47:54'),(29,'Drake Batz','uweimann@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','JM44TtmcQE','2025-12-23 22:47:54','2025-12-23 22:47:54'),(30,'Leonardo Towne','koelpin.alfredo@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Qc8Oi8ebw3','2025-12-23 22:47:54','2025-12-23 22:47:54'),(31,'Isaiah D\'Amore','cbogan@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','pu69jcEwC0','2025-12-23 22:47:54','2025-12-23 22:47:54'),(32,'Dr. Elmo Kub II','deonte74@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','CP9wR4Osma','2025-12-23 22:47:54','2025-12-23 22:47:54'),(33,'Clarabelle Stroman','arnoldo49@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','9qTmyuQYia','2025-12-23 22:47:54','2025-12-23 22:47:54'),(34,'Constance Schuppe','klocko.olga@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','yHaWPTjR0n','2025-12-23 22:47:54','2025-12-23 22:47:54'),(35,'Corbin Bayer','lfritsch@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','IYCUW230sT','2025-12-23 22:47:54','2025-12-23 22:47:54'),(36,'Hayden Lindgren IV','jovany.kiehn@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','n7K6buWHJZ','2025-12-23 22:47:54','2025-12-23 22:47:54'),(37,'Turner Nikolaus','gerhard95@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','YAsnAViUIz','2025-12-23 22:47:54','2025-12-23 22:47:54');
+INSERT INTO `users` VALUES (1,'Test User','test@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','dnxVaf5tqS','2025-12-23 22:47:53','2025-12-23 22:47:53'),(2,'Admin Officer','admin@example.com','2025-12-23 22:47:53','$2y$12$mXkVI4nHKWYVelyNpjaxp.vgYYPLaJX3xxtuNh.1oedKdcrZ7QfA.','N9iqoBwJjLrw94DkDx5Z4NuJyNHSY3mDhQDsq9xl7rosHC7JdkQIMSxLprf5','2025-12-23 22:47:53','2026-01-27 03:55:53'),(3,'Dr. Bennett Paucek','ghayes@example.org','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','FAqsjMv2ec','2025-12-23 22:47:53','2025-12-23 22:47:53'),(4,'Leo Pfeffer','noconner@example.org','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Gs1zbm6AJF','2025-12-23 22:47:53','2025-12-23 22:47:53'),(5,'Antoinette Boyle','shyanne67@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','i94YVCESRa','2025-12-23 22:47:53','2025-12-23 22:47:53'),(6,'Mr. Mckenna Lind','johns.gust@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','KVZ2eyLMfW','2025-12-23 22:47:53','2025-12-23 22:47:53'),(7,'Angelo Swaniawski','lynch.delpha@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','mS6Vk6foV8','2025-12-23 22:47:53','2025-12-23 22:47:53'),(8,'Kyla Swaniawski Jr.','roger74@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','kAjndqonbv','2025-12-23 22:47:53','2025-12-23 22:47:53'),(9,'Joanny McDermott IV','jovan.rolfson@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','fsm8SiSq32','2025-12-23 22:47:53','2025-12-23 22:47:53'),(10,'Mr. Frankie Russel','duncan.kunze@example.net','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','vu71TAyZub','2025-12-23 22:47:53','2025-12-23 22:47:53'),(11,'Myles Strosin','roberta.abbott@example.com','2025-12-23 22:47:53','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','GMgLnI5DVy','2025-12-23 22:47:53','2025-12-23 22:47:53'),(12,'Prof. Elmira Schiller MD','toreilly@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','3nMSwwZT8A','2025-12-23 22:47:54','2025-12-23 22:47:54'),(13,'Dr. Dario Hahn IV','johnathan90@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','SU1wcjQRwf','2025-12-23 22:47:54','2025-12-23 22:47:54'),(14,'Pasquale Murphy','janessa.becker@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','ZJIzMzzXPo','2025-12-23 22:47:54','2025-12-23 22:47:54'),(15,'Ms. Lulu Daugherty I','chelsea13@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qZpyMtiGhm','2025-12-23 22:47:54','2025-12-23 22:47:54'),(16,'Brando Beer','bednar.mose@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','kiApaQ7aK4','2025-12-23 22:47:54','2025-12-23 22:47:54'),(17,'Susie Konopelski','judy15@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','wz77Sg2gPs','2025-12-23 22:47:54','2025-12-23 22:47:54'),(18,'Antonetta Yundt','carter.daren@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','ouL3Ns9QJW','2025-12-23 22:47:54','2025-12-23 22:47:54'),(19,'Florencio Casper','yasmeen94@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qxZBSjIkdy','2025-12-23 22:47:54','2025-12-23 22:47:54'),(20,'Kylie Beatty','imaggio@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','JCPfanqZSe','2025-12-23 22:47:54','2025-12-23 22:47:54'),(21,'Alana Larson','bechtelar.sterling@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','PPXU1QJSbG','2025-12-23 22:47:54','2025-12-23 22:47:54'),(22,'Jeremy Heidenreich','rcarroll@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','qNtezrMuzM','2025-12-23 22:47:54','2025-12-23 22:47:54'),(23,'Tremaine Moore Jr.','nparker@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','KKFKBuhGuw','2025-12-23 22:47:54','2025-12-23 22:47:54'),(24,'Bud Pouros','boris03@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Y33F1jsAbc','2025-12-23 22:47:54','2025-12-23 22:47:54'),(25,'Roel Mayert','cruz16@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','xRBcz2MEiP','2025-12-23 22:47:54','2025-12-23 22:47:54'),(26,'Ryan Johns II','mschneider@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','9VPBugvGll','2025-12-23 22:47:54','2025-12-23 22:47:54'),(27,'Abby Ebert','wkoepp@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','QaFR5o9ja6','2025-12-23 22:47:54','2025-12-23 22:47:54'),(28,'Chasity Lynch','norbert66@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','SkABFbCibG','2025-12-23 22:47:54','2025-12-23 22:47:54'),(29,'Drake Batz','uweimann@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','JM44TtmcQE','2025-12-23 22:47:54','2025-12-23 22:47:54'),(30,'Leonardo Towne','koelpin.alfredo@example.com','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','Qc8Oi8ebw3','2025-12-23 22:47:54','2025-12-23 22:47:54'),(31,'Isaiah D\'Amore','cbogan@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','pu69jcEwC0','2025-12-23 22:47:54','2025-12-23 22:47:54'),(32,'Dr. Elmo Kub II','deonte74@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','CP9wR4Osma','2025-12-23 22:47:54','2025-12-23 22:47:54'),(33,'Clarabelle Stroman','arnoldo49@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','9qTmyuQYia','2025-12-23 22:47:54','2025-12-23 22:47:54'),(34,'Constance Schuppe','klocko.olga@example.org','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','yHaWPTjR0n','2025-12-23 22:47:54','2025-12-23 22:47:54'),(35,'Corbin Bayer','lfritsch@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','IYCUW230sT','2025-12-23 22:47:54','2025-12-23 22:47:54'),(36,'Hayden Lindgren IV','jovany.kiehn@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','n7K6buWHJZ','2025-12-23 22:47:54','2025-12-23 22:47:54'),(37,'Turner Nikolaus','gerhard95@example.net','2025-12-23 22:47:54','$2y$12$CsBXQGeFjOh2RkMohLHrSeYNx0o82PXoUaRDa8Bhnu/BLBAXNFjLC','YAsnAViUIz','2025-12-23 22:47:54','2025-12-23 22:47:54');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -472,4 +473,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-27 15:39:41
+-- Dump completed on 2026-01-27 15:57:12
