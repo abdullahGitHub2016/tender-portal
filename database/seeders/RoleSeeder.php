@@ -31,7 +31,7 @@ class RoleSeeder extends Seeder
         }
 
         // 3. Create Roles and Assign Permissions
-        $admin = Role::firstOrCreate(['name' => 'Navy Admin', 'guard_name' => 'web']);
+        $admin = Role::firstOrCreate(['name' => 'Admin', 'guard_name' => 'web']);
         $admin->syncPermissions(['create tenders', 'edit tenders', 'view all bids']);
 
         $supplier = Role::firstOrCreate(['name' => 'Supplier', 'guard_name' => 'web']);

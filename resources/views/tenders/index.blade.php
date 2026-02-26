@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-semibold">Tender Opportunities</h2>
             {{-- Only show Create button to Admin --}}
-            @role('Navy Admin')
+            @role('Admin')
                 <a href="{{ route('tenders.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded">Create Tender</a>
             @endrole
         </div>
@@ -64,7 +64,7 @@
                                             </svg>
                                         </a>
 
-                                        @role('Navy Admin')
+                                        @role('Admin')
                                             <a href="{{ route('tenders.edit', $tender) }}"
                                                 class="text-gray-400 hover:text-yellow-500 transition-colors"
                                                 title="Edit Tender">

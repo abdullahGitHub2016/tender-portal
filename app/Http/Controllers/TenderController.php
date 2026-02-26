@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Tender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TenderController extends Controller
 {
+
     // Display all tenders
     public function index()
     {
@@ -14,9 +16,18 @@ class TenderController extends Controller
         return view('tenders.index', compact('tenders'));
     }
 
-    // Show form to create a tender
     public function create()
     {
+        // Correct way to get the user:
+        $user = Auth::user();
+
+        // Optional: Check if the user has 'Navy Admin' role before showing the page
+        if (!$user || !$user->hasRole('Admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        //dd($user); // Debugging line to check the user object
+
         return view('tenders.create');
     }
 
@@ -24,15 +35,16 @@ class TenderController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tender_no' => 'required|unique:tenders',
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'closing_date' => 'required|date|after:today',
+            'tender_no'    => 'required|unique:tenders|max:255',
+            'title'        => 'required|max:255',
+            'closing_date' => 'required|date',
+            'description'  => 'nullable',
         ]);
 
+        // This will only work if $fillable is set in the Model
         Tender::create($validated);
 
-        return redirect()->route('tenders.index')->with('success', 'Tender published successfully.');
+        return redirect()->route('tenders.index')->with('success', 'Tender published successfully!');
     }
 
     // Show specific tender with its bids
@@ -48,7 +60,7 @@ class TenderController extends Controller
     public function edit(Tender $tender)
     {
         // Ensure only Admins can access this page
-        if (!auth()->user()->hasRole('Navy Admin')) {
+        if (!Auth::user() || !Auth::user()->hasRole('Admin')) {
             abort(403);
         }
 

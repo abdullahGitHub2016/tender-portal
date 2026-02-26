@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
     // 1. Setup Roles and Permissions
     $this->call(RoleSeeder::class);
 
-    // 2. Create a Navy Admin
+    // 2. Create a Admin
     $admin = \App\Models\User::factory()->create([
-        'name' => 'Navy Admin Officer',
+        'name' => 'Admin Officer',
         'email' => 'admin@example.com',
     ]);
-    $admin->assignRole('Navy Admin');
+    $admin->assignRole('Admin');
 
     // 3. Create 5 Suppliers
     \App\Models\User::factory(5)->create()->each(function ($user) {

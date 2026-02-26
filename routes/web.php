@@ -3,6 +3,7 @@
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,7 +14,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
 
 // --- PROFILE ROUTES (Fixes profile.edit error) ---
@@ -22,13 +22,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    // --- TENDER ROUTES ---
-    // All authenticated users can view the list and individual tenders
-    Route::get('/tenders', [TenderController::class, 'index'])->name('tenders.index');
-    Route::get('/tenders/{tender}', [TenderController::class, 'show'])->name('tenders.show');
 
-    // ONLY Navy Admins can Create, Edit, or Delete Tenders
-    Route::middleware(['role:Navy Admin'])->group(function () {
+    // ONLY Admins can Create, Edit, or Delete Tenders
+    Route::middleware(['role:Admin'])->group(function () {
         Route::get('/tenders/create', [TenderController::class, 'create'])->name('tenders.create');
         Route::post('/tenders', [TenderController::class, 'store'])->name('tenders.store');
         Route::get('/tenders/{tender}/edit', [TenderController::class, 'edit'])->name('tenders.edit');
@@ -38,6 +34,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Admin only: Download a specific bid document
         Route::get('/bids/{bid}/download', [BidController::class, 'download'])->name('bids.download');
     });
+
+        // --- TENDER ROUTES ---
+    // All authenticated users can view the list and individual tenders
+    Route::get('/tenders', [TenderController::class, 'index'])->name('tenders.index');
+    Route::get('/tenders/{tender}', [TenderController::class, 'show'])->name('tenders.show');
 
     // --- BID ROUTES ---
     // ONLY Suppliers can submit bids

@@ -41,7 +41,7 @@ class BidController extends Controller
     public function download(Bid $bid)
     {
         // Add security check: only Admin can download
-        if (!Auth::user()->hasRole('Navy Admin')) {
+        if (!Auth::user()->hasRole('Admin')) {
             abort(403);
         }
 

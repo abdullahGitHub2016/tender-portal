@@ -25,6 +25,25 @@ TenderApp provides a centralized platform for administrators to manage procureme
 * **Database:** MySQL / PostgreSQL
 * **Icons:** Heroicons
 
+
+## Project Screenshots
+
+### Admin Dashboard
+Overview of the system statistics and navigation.
+![Dashboard](screenshots/dashboard.png)
+
+### Tender Management
+View all active and closed tender opportunities.
+![Tender List](screenshots/tender-list.png)
+
+### Create & Edit Tenders
+Interface for administrators to publish or update tender details.
+![Add and Edit Tenders](screenshots/tender-edit-add.png)
+
+### Bid Submissions
+View and manage bids submitted by suppliers for specific tenders.
+![Tender Bids](screenshots/tender-bids.png)
+
 ## 📸 Dashboard Preview
 The dashboard includes:
 1.  **Welcome Banner:** High-contrast greeting with system status.

@@ -14,6 +14,7 @@ class Tender extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // Add these fields to match your database columns
     protected $fillable = [
         'tender_no',
         'title',

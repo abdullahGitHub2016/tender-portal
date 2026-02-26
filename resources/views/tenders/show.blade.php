@@ -34,7 +34,7 @@
                 </form>
                 @endrole
 
-                @role('Navy Admin')
+                @role('Admin')
                 <h3 class="text-lg font-bold mb-4">Submitted Bids</h3>
                 <table class="min-w-full border">
                     <thead>
